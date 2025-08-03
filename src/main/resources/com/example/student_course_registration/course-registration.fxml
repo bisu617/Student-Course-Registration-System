@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.student_course_registration.CourseRegistrationController">
+
+    <style>
+        .root {
+        -fx-background-color: #f0f2f5;
+        }
+
+        .header {
+        -fx-background-color: white;
+        -fx-padding: 15;
+        -fx-background-radius: 10;
+        -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 2);
+        }
+
+        .title {
+        -fx-font-size: 24px;
+        -fx-font-weight: bold;
+        -fx-text-fill: #1a237e;
+        }
+
+        .info-card {
+        -fx-background-color: white;
+        -fx-padding: 15;
+        -fx-background-radius: 10;
+        -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 2);
+        }
+
+        .courses-list {
+        -fx-background-color: white;
+        -fx-background-radius: 10;
+        -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 2);
+        }
+
+        .course-title {
+        -fx-font-size: 14px;
+        -fx-font-weight: bold;
+        -fx-text-fill: #1a237e;
+        }
+
+        .course-details {
+        -fx-font-size: 12px;
+        -fx-text-fill: #666666;
+        }
+
+        .course-container {
+        -fx-padding: 10;
+        -fx-background-color: white;
+        -fx-border-color: #e0e0e0;
+        -fx-border-width: 0 0 1 0;
+        }
+
+        .courses-list .list-cell {
+        -fx-padding: 10;
+        -fx-background-color: transparent;
+        }
+
+        .courses-list .list-cell:filled:selected {
+        -fx-background-color: #e3f2fd;
+        }
+
+        .courses-list .list-cell:filled:hover {
+        -fx-background-color: #f5f5f5;
+        }
+
+        .button {
+        -fx-background-radius: 20;
+        -fx-padding: 8 20;
+        -fx-font-weight: bold;
+        -fx-cursor: hand;
+        }
+
+        .register-button {
+        -fx-background-color: #4CAF50;
+        -fx-text-fill: white;
+        }
+
+        .register-button:hover {
+        -fx-background-color: #45a049;
+        }
+
+        .back-button {
+        -fx-background-color: #f44336;
+        -fx-text-fill: white;
+        }
+
+        .back-button:hover {
+        -fx-background-color: #d32f2f;
+        }
+    </style>
+
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <!-- Header -->
+    <VBox styleClass="header" spacing="10">
+        <Label text="Course Registration" styleClass="title"/>
+        <Label fx:id="studentInfoLabel" wrapText="true"/>
+    </VBox>
+
+    <!-- Course List -->
+    <ListView fx:id="availableCoursesListView" VBox.vgrow="ALWAYS" styleClass="courses-list"/>
+
+    <!-- Buttons -->
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Register Selected Course" onAction="#handleRegister" styleClass="button, register-button"/>
+        <Button text="Back to Dashboard" onAction="#handleBack" styleClass="button, back-button"/>
+    </HBox>
+
+    <!-- Status Message -->
+    <Label fx:id="messageLabel" styleClass="info-card" wrapText="true"/>
+</VBox>

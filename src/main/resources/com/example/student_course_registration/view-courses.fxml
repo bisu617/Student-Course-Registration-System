@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.student_course_registration.ViewCoursesController">
+
+    <style>
+        .root {
+        -fx-background-color: #f5f5ff;
+        }
+
+        .header {
+        -fx-background-color: #2d1f4d;
+        -fx-padding: 15;
+        }
+
+        .title-text {
+        -fx-font-size: 24px;
+        -fx-text-fill: white;
+        -fx-font-weight: bold;
+        }
+
+        .table-view {
+        -fx-background-color: white;
+        -fx-background-radius: 10;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+        }
+
+        .button {
+        -fx-background-color: #2d1f4d;
+        -fx-text-fill: white;
+        -fx-font-weight: bold;
+        -fx-padding: 10 20;
+        -fx-background-radius: 5;
+        }
+
+        .button:hover {
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 2);
+        }
+    </style>
+
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <!-- Header -->
+    <HBox styleClass="header">
+        <Label text="My Registered Courses" styleClass="title-text"/>
+    </HBox>
+
+    <!-- Table of Courses -->
+    <TableView fx:id="coursesTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="codeColumn" text="Course Code" prefWidth="100"/>
+            <TableColumn fx:id="nameColumn" text="Course Name" prefWidth="200"/>
+            <TableColumn fx:id="creditsColumn" text="Credits" prefWidth="100"/>
+            <TableColumn fx:id="actionColumn" text="Action" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+    <!-- Buttons -->
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Back to Dashboard" onAction="#handleBack"/>
+    </HBox>
+
+    <Label fx:id="messageLabel"/>
+</VBox>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.student_course_registration.LoginController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <Label text="Student Course Registration System" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+    <GridPane vgap="10" hgap="10" alignment="CENTER">
+        <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    </GridPane>
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Login" onAction="#handleLogin" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+        <Button text="Register" onAction="#handleRegister" style="-fx-background-color: #2196F3; -fx-text-fill: white;" />
+    </HBox>
+    <Label fx:id="messageLabel" textFill="RED" />
+</VBox>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+
+<VBox spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.student_course_registration.DashboardController">
+
+    <style>
+        .root {
+        -fx-background-color: #f5f5ff;
+        }
+
+        .header {
+        -fx-background-color: #2d1f4d;
+        -fx-padding: 15;
+        }
+
+        .title-text {
+        -fx-font-size: 24px;
+        -fx-text-fill: white;
+        -fx-font-weight: bold;
+        }
+
+        .welcome-text {
+        -fx-font-size: 28px;
+        -fx-font-weight: bold;
+        -fx-text-fill: #2d1f4d;
+        }
+
+        .section-title {
+        -fx-font-size: 20px;
+        -fx-font-weight: bold;
+        -fx-text-fill: #2d1f4d;
+        -fx-padding: 0 0 10 0;
+        }
+
+        .info-label {
+        -fx-font-size: 16px;
+        -fx-text-fill: #666;
+        }
+
+        .info-value {
+        -fx-font-size: 16px;
+        -fx-text-fill: #2d1f4d;
+        -fx-font-weight: bold;
+        }
+
+        .action-card {
+        -fx-background-color: white;
+        -fx-background-radius: 10;
+        -fx-padding: 15;
+        -fx-spacing: 5;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+        -fx-cursor: hand;
+        }
+
+        .action-card:hover {
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0, 0, 5);
+        -fx-translate-y: -2;
+        -fx-background-color: #2d1f4d;
+        }
+
+        .action-card:hover .action-title {
+        -fx-text-fill: white;
+        }
+
+        .action-card:hover .action-description {
+        -fx-text-fill: #e0e0e0;
+        }
+
+        .action-icon {
+        -fx-font-size: 24px;
+        }
+
+        .action-title {
+        -fx-font-size: 16px;
+        -fx-font-weight: bold;
+        -fx-text-fill: #2d1f4d;
+        }
+
+        .action-description {
+        -fx-font-size: 12px;
+        -fx-text-fill: #666;
+        -fx-wrap-text: true;
+        }
+    </style>
+
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <!-- Header -->
+    <HBox styleClass="header">
+        <Label text="Student Dashboard" styleClass="title-text"/>
+    </HBox>
+
+    <!-- Welcome -->
+    <VBox spacing="5">
+        <Label fx:id="welcomeLabel" styleClass="welcome-text"/>
+        <Label fx:id="userLoginLabel" styleClass="info-label"/>
+    </VBox>
+
+    <HBox spacing="40">
+        <!-- Left side - Student Information -->
+        <VBox spacing="20" HBox.hgrow="ALWAYS">
+            <Label text="Student Information" styleClass="section-title"/>
+            <GridPane vgap="10" hgap="20">
+                <Label text="Program:" styleClass="info-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <Label fx:id="programLabel" styleClass="info-value" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <Label text="Semester:" styleClass="info-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Label fx:id="semesterLabel" styleClass="info-value" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                <Label text="Email:" styleClass="info-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <Label fx:id="emailLabel" styleClass="info-value" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                <Label text="Courses:" styleClass="info-label" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                <Label fx:id="coursesLabel" styleClass="info-value" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            </GridPane>
+
+            <Label text="Course Summary" styleClass="section-title"/>
+            <BarChart fx:id="courseChart" legendVisible="false">
+                <xAxis>
+                    <CategoryAxis label="Month"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Courses" tickUnit="1"/>
+                </yAxis>
+            </BarChart>
+        </VBox>
+
+        <!-- Right side - Quick Actions -->
+        <VBox spacing="15" minWidth="300">
+            <Label text="Quick Actions" styleClass="section-title"/>
+
+            <!-- Register Courses Card -->
+            <VBox styleClass="action-card" onMouseClicked="#handleRegisterCourses">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="📚" styleClass="action-icon"/>
+                    <Label text="Register for Courses" styleClass="action-title"/>
+                </HBox>
+                <Label text="Browse and register for available courses"
+                       styleClass="action-description"/>
+            </VBox>
+
+            <!-- View Courses Card -->
+            <VBox styleClass="action-card" onMouseClicked="#handleViewCourses">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="📋" styleClass="action-icon"/>
+                    <Label text="View My Courses" styleClass="action-title"/>
+                </HBox>
+                <Label text="See your registered courses"
+                       styleClass="action-description"/>
+            </VBox>
+
+            <!-- Refresh Dashboard Card -->
+            <VBox styleClass="action-card" onMouseClicked="#handleRefresh">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="🔄" styleClass="action-icon"/>
+                    <Label text="Refresh Dashboard" styleClass="action-title"/>
+                </HBox>
+                <Label text="Update dashboard information"
+                       styleClass="action-description"/>
+            </VBox>
+        </VBox>
+    </HBox>
+
+    <!-- Status Bar -->
+    <VBox spacing="5">
+        <Label fx:id="messageLabel" styleClass="info-label"/>
+        <Label fx:id="lastUpdateLabel" styleClass="info-label"/>
+    </VBox>
+</VBox>
