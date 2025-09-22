@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product - Product Store</title>
+    <link rel="stylesheet" href="css/product.css">
+    <link rel="stylesheet" href="css/common.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="home.html">TechStore</a>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="home.html" class="nav-link">Home</a>
+                <a href="home.html?category=keyboards" class="nav-link">Keyboards</a>
+                <a href="home.html?category=mice" class="nav-link">Mice</a>
+                <a href="home.html?category=headphones" class="nav-link">Headphones</a>
+                <a href="home.html?category=monitors" class="nav-link">Monitors</a>
+                <a href="home.html?category=mousepads" class="nav-link">Mousepads</a>
+            </div>
+            
+            <div class="nav-actions">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search products...">
+                    <button class="search-btn">🔍</button>
+                </div>
+                
+                <div class="cart-container">
+                    <button id="cart-toggle" class="cart-btn">
+                        🛒
+                        <span id="cart-count" class="cart-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs-container">
+        <div class="container">
+            <nav id="breadcrumbs" class="breadcrumbs">
+                <a href="home.html">Home</a>
+                <span class="separator">&gt;</span>
+                <span class="current">Loading...</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        <div class="container">
+            <div class="product-layout">
+                <!-- Product Images -->
+                <div class="product-images">
+                    <div class="main-image-container">
+                        <img id="main-product-image" src="" alt="Product Image" class="main-image">
+                        <div class="image-navigation">
+                            <button class="image-nav prev" onclick="productPage.previousImage()">‹</button>
+                            <button class="image-nav next" onclick="productPage.nextImage()">›</button>
+                        </div>
+                    </div>
+                    <div id="image-thumbnails" class="image-thumbnails">
+                        <!-- Thumbnails will be populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Product Information -->
+                <div class="product-info">
+                    <div class="product-header">
+                        <h1 id="product-name" class="product-title">Loading...</h1>
+                        
+                        <div class="product-rating-container">
+                            <div id="product-rating" class="product-rating">
+                                <!-- Stars will be populated dynamically -->
+                            </div>
+                            <span id="product-reviews" class="product-reviews">(0 reviews)</span>
+                        </div>
+                    </div>
+
+                    <div class="product-pricing">
+                        <div class="price-container">
+                            <span id="product-price" class="current-price">$0.00</span>
+                            <span id="product-original-price" class="original-price" style="display: none;">$0.00</span>
+                            <span id="product-discount" class="discount-badge" style="display: none;">0% OFF</span>
+                        </div>
+                        
+                        <div id="product-stock" class="stock-status">
+                            <!-- Stock status will be populated dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="product-description">
+                        <p id="product-description">Loading product description...</p>
+                    </div>
+
+                    <div class="product-features">
+                        <h3>Key Features</h3>
+                        <ul id="product-features" class="features-list">
+                            <!-- Features will be populated dynamically -->
+                        </ul>
+                    </div>
+
+                    <div class="product-actions">
+                        <div class="quantity-selector">
+                            <label for="quantity-input">Quantity:</label>
+                            <div class="quantity-controls">
+                                <button id="quantity-down" class="quantity-btn">-</button>
+                                <input id="quantity-input" type="number" value="1" min="1" max="99" class="quantity-input">
+                                <button id="quantity-up" class="quantity-btn">+</button>
+                            </div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button id="add-to-cart-btn" class="btn btn-primary add-to-cart">
+                                Add to Cart
+                            </button>
+                            <button class="btn btn-secondary wishlist-btn">
+                                ♥ Add to Wishlist
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-details">
+                        <div class="details-tabs">
+                            <button class="tab-button active" data-tab="specifications">Specifications</button>
+                            <button class="tab-button" data-tab="shipping">Shipping Info</button>
+                            <button class="tab-button" data-tab="returns">Returns</button>
+                        </div>
+                        
+                        <div class="tab-content">
+                            <div id="specifications" class="tab-panel active">
+                                <div class="spec-grid">
+                                    <div class="spec-row">
+                                        <span class="spec-label">Category:</span>
+                                        <span id="product-category" class="spec-value">-</span>
+                                    </div>
+                                    <div class="spec-row">
+                                        <span class="spec-label">SKU:</span>
+                                        <span id="product-sku" class="spec-value">-</span>
+                                    </div>
+                                    <div class="spec-row">
+                                        <span class="spec-label">Availability:</span>
+                                        <span id="product-availability" class="spec-value">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="shipping" class="tab-panel">
+                                <ul class="info-list">
+                                    <li>Free shipping on orders over $50</li>
+                                    <li>Standard delivery: 3-5 business days</li>
+                                    <li>Express delivery: 1-2 business days (additional charges apply)</li>
+                                    <li>International shipping available</li>
+                                </ul>
+                            </div>
+                            
+                            <div id="returns" class="tab-panel">
+                                <ul class="info-list">
+                                    <li>30-day return policy</li>
+                                    <li>Items must be in original condition</li>
+                                    <li>Free return shipping</li>
+                                    <li>Refunds processed within 5-7 business days</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Products -->
+            <section id="related-products" class="related-products">
+                <!-- Related products will be populated dynamically -->
+            </section>
+        </div>
+    </main>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button class="cart-close" onclick="productPage.toggleCart()">×</button>
+        </div>
+        
+        <div id="cart-items" class="cart-items">
+            <!-- Cart items will be populated dynamically -->
+        </div>
+        
+        <div class="cart-footer">
+            <div id="cart-total" class="cart-total">Total: $0.00</div>
+            <button class="btn btn-primary checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div id="cart-overlay" class="cart-overlay" onclick="productPage.toggleCart()"></div>
+
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="loading-spinner" style="display: none;">
+        <div class="spinner"></div>
+        <p>Loading product...</p>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>TechStore</h4>
+                    <p>Your one-stop shop for premium computer peripherals and accessories.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="home.html?category=keyboards">Keyboards</a></li>
+                        <li><a href="home.html?category=mice">Mice</a></li>
+                        <li><a href="home.html?category=headphones">Headphones</a></li>
+                        <li><a href="home.html?category=monitors">Monitors</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#shipping">Shipping Info</a></li>
+                        <li><a href="#returns">Returns</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 TechStore. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/database.js"></script>
+    <script src="js/product.js"></script>
+    
+    <script>
+        // Tab functionality for product details
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabPanels = document.querySelectorAll('.tab-panel');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetTab = button.getAttribute('data-tab');
+                    
+                    // Remove active class from all buttons and panels
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabPanels.forEach(panel => panel.classList.remove('active'));
+                    
+                    // Add active class to clicked button and corresponding panel
+                    button.classList.add('active');
+                    document.getElementById(targetTab).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - Premium Computer Peripherals</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="home.html">TechStore</a>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="home.html" class="nav-link active">Home</a>
+                <a href="home.html?category=keyboards" class="nav-link">Keyboards</a>
+                <a href="home.html?category=mice" class="nav-link">Mice</a>
+                <a href="home.html?category=headphones" class="nav-link">Headphones</a>
+                <a href="home.html?category=monitors" class="nav-link">Monitors</a>
+                <a href="home.html?category=mousepads" class="nav-link">Mousepads</a>
+            </div>
+            
+            <div class="nav-actions">
+                <div class="search-container">
+                    <input type="text" id="search-input" class="search-input" placeholder="Search products...">
+                    <button id="search-btn" class="search-btn">🔍</button>
+                </div>
+                
+                <div class="cart-container">
+                    <button id="cart-toggle" class="cart-btn">
+                        🛒
+                        <span id="cart-count" class="cart-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Premium Computer Peripherals</h1>
+                <p class="hero-subtitle">Discover the latest keyboards, mice, headphones, monitors, and accessories</p>
+                <button class="hero-cta" onclick="scrollToProducts()">Shop Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="categories-grid">
+                <div class="category-card" onclick="filterByCategory('keyboards')">
+                    <div class="category-image">⌨️</div>
+                    <h3>Keyboards</h3>
+                    <p>Mechanical & Wireless</p>
+                </div>
+                <div class="category-card" onclick="filterByCategory('mice')">
+                    <div class="category-image">🖱️</div>
+                    <h3>Mice</h3>
+                    <p>Gaming & Office</p>
+                </div>
+                <div class="category-card" onclick="filterByCategory('headphones')">
+                    <div class="category-image">🎧</div>
+                    <h3>Headphones</h3>
+                    <p>Audio & Gaming</p>
+                </div>
+                <div class="category-card" onclick="filterByCategory('monitors')">
+                    <div class="category-image">🖥️</div>
+                    <h3>Monitors</h3>
+                    <p>4K & Gaming</p>
+                </div>
+                <div class="category-card" onclick="filterByCategory('mousepads')">
+                    <div class="category-image">🖱️</div>
+                    <h3>Mousepads</h3>
+                    <p>RGB & XL Size</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <div class="products-header">
+                <h2 id="products-title" class="section-title">All Products</h2>
+                
+                <div class="products-controls">
+                    <div class="filter-controls">
+                        <select id="category-filter" class="filter-select">
+                            <option value="">All Categories</option>
+                            <option value="keyboards">Keyboards</option>
+                            <option value="mice">Mice</option>
+                            <option value="headphones">Headphones</option>
+                            <option value="monitors">Monitors</option>
+                            <option value="mousepads">Mousepads</option>
+                        </select>
+                        
+                        <select id="sort-filter" class="filter-select">
+                            <option value="newest">Newest First</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="rating">Highest Rated</option>
+                            <option value="name">Name A-Z</option>
+                        </select>
+                    </div>
+                    
+                    <div class="view-controls">
+                        <button id="grid-view" class="view-btn active" title="Grid View">⊞</button>
+                        <button id="list-view" class="view-btn" title="List View">☰</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filters-bar">
+                <div class="price-filter">
+                    <label>Price Range:</label>
+                    <input type="range" id="min-price" min="0" max="500" value="0" class="price-slider">
+                    <input type="range" id="max-price" min="0" max="500" value="500" class="price-slider">
+                    <div class="price-display">
+                        <span>$<span id="min-price-display">0</span> - $<span id="max-price-display">500</span></span>
+                    </div>
+                </div>
+                
+                <button id="clear-filters" class="clear-filters">Clear Filters</button>
+            </div>
+            
+            <div id="products-grid" class="products-grid">
+                <!-- Products will be populated dynamically -->
+            </div>
+            
+            <div id="no-products" class="no-products" style="display: none;">
+                <h3>No products found</h3>
+                <p>Try adjusting your filters or search terms</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured">
+        <div class="container">
+            <h2 class="section-title">Featured Products</h2>
+            <div id="featured-grid" class="featured-grid">
+                <!-- Featured products will be populated dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button class="cart-close" onclick="toggleCart()">×</button>
+        </div>
+        
+        <div id="cart-items" class="cart-items">
+            <!-- Cart items will be populated dynamically -->
+        </div>
+        
+        <div class="cart-footer">
+            <div id="cart-total" class="cart-total">Total: $0.00</div>
+            <button class="btn btn-primary checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div id="cart-overlay" class="cart-overlay" onclick="toggleCart()"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>TechStore</h4>
+                    <p>Your one-stop shop for premium computer peripherals and accessories.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="home.html?category=keyboards">Keyboards</a></li>
+                        <li><a href="home.html?category=mice">Mice</a></li>
+                        <li><a href="home.html?category=headphones">Headphones</a></li>
+                        <li><a href="home.html?category=monitors">Monitors</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#shipping">Shipping Info</a></li>
+                        <li><a href="#returns">Returns</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 TechStore. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/database.js"></script>
+    <script src="js/home.js"></script>
+</body>
+</html>
